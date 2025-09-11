@@ -11,8 +11,8 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   // INTERNET PACKAGES
   // Axis
-  { id: 2, category: 'internet', provider: 'Axis', name: 'Kuota 2.5GB', price: 9000, desc: 'Bronet 2.5GB 1 hari', logo: '/assets/logos/axis.png' },
   { id: 1, category: 'internet', provider: 'Axis', name: 'Kuota 1.5GB', price: 7000, desc: 'Bronet 1.5GB 1 hari', logo: '/assets/logos/axis.png' },
+  { id: 2, category: 'internet', provider: 'Axis', name: 'Kuota 2.5GB', price: 9000, desc: 'Bronet 2.5GB 1 hari', logo: '/assets/logos/axis.png' },
   { id: 3, category: 'internet', provider: 'Axis', name: 'Kuota 2GB', price: 11000, desc: 'Bronet 2GB 3 hari', logo: '/assets/logos/axis.png' },
   { id: 4, category: 'internet', provider: 'Axis', name: 'Kuota 4GB', price: 13000, desc: 'Bronet 4GB 3 hari', logo: '/assets/logos/axis.png' },
   { id: 5, category: 'internet', provider: 'Axis', name: 'Kuota 500MB', price: 6000, desc: 'Data 500MB All 30 hari', logo: '/assets/logos/axis.png' },
