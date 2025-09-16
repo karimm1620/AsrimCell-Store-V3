@@ -1,7 +1,7 @@
-import React from 'react';
-import { useTheme } from '../contexts/ThemeContext';
-import { SunIcon, MoonIcon, MenuIcon, CloseIcon } from './icons';
-import { ToggleSwitch } from './ToggleSwitch';
+import React from "react";
+import { useTheme } from "../contexts/ThemeContext";
+import { SunIcon, MoonIcon, MenuIcon, CloseIcon } from "./icons";
+import { ToggleSwitch } from "./ToggleSwitch";
 
 interface NavbarProps {
   selectedCategory: string;
@@ -11,51 +11,55 @@ interface NavbarProps {
 }
 
 const categories = [
-  { key: 'all', label: 'Semua' },
-  { key: 'internet', label: 'Internet' },
-  { key: 'game', label: 'Game' }
+  { key: "all", label: "Semua" },
+  { key: "internet", label: "Internet" },
+  { key: "game", label: "Game" },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({
   selectedCategory,
   setSelectedCategory,
   mobileOpen,
-  setMobileOpen
+  setMobileOpen,
 }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
 
   return (
-    <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200/20 dark:border-gray-700/20 fixed w-full z-50 transition-all duration-300">
+    <nav className="glass dark:glass-dark fixed w-full z-50 transition-all duration-500 shadow-glass">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              {/* <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">AR</span>
+              {/* <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-glow-blue animate-glow">
+                <span className="text-white font-bold text-lg">A</span>
               </div> */}
-              <div className='w-8 h-8 items-center justify-center'>
-                <img src="/assets/logos/logo cell.png" alt="" />
+              <div className="w-10 h-10 items-center justify-center rounded-2xl flex shadow-glow-blue animate-glow">
+                <img
+                  className="w-8 h-8"
+                  src="/assets/logos/logo cell.png"
+                  alt="logo"
+                />
               </div>
-              <div className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 AsrimCell
               </div>
             </div>
-            <div className="hidden sm:block text-sm text-gray-600 dark:text-gray-400">
+            <div className="hidden sm:block text-sm text-gray-600 dark:text-gray-300 font-medium">
               • Voucher & Top Up Terpercaya
             </div>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2">
-            {categories.map(category => (
+            {categories.map((category) => (
               <button
                 key={category.key}
                 onClick={() => setSelectedCategory(category.key)}
-                className={`px-4 py-2 rounded-xl font-medium transition-all duration-200 ${
+                className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
                   selectedCategory === category.key
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-glass hover:shadow-glass-lg"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-white/10 backdrop-blur-sm"
                 }`}
               >
                 {category.label}
@@ -75,11 +79,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               />
               <MoonIcon className="w-4 h-4 text-purple-500" />
             </div>
-            
+
             {/* Mobile theme toggle button */}
             <button
               onClick={toggleDarkMode}
-              className="sm:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
+              className="sm:hidden p-3 rounded-2xl glass dark:glass-dark hover:shadow-glass transition-all duration-300 transform hover:scale-110"
               aria-label="Toggle theme"
             >
               {isDarkMode ? (
@@ -91,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
+              className="md:hidden p-3 rounded-2xl glass dark:glass-dark hover:shadow-glass transition-all duration-300 transform hover:scale-110"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <CloseIcon /> : <MenuIcon />}
@@ -101,19 +105,19 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Mobile Navigation */}
         {mobileOpen && (
-          <div className="md:hidden mt-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm">
+          <div className="md:hidden mt-4 p-4 glass dark:glass-dark rounded-2xl shadow-glass animate-slide-down">
             <div className="flex flex-col gap-2">
-              {categories.map(category => (
+              {categories.map((category) => (
                 <button
                   key={category.key}
                   onClick={() => {
                     setSelectedCategory(category.key);
                     setMobileOpen(false);
                   }}
-                  className={`py-3 px-4 text-left rounded-lg font-medium transition-all duration-200 ${
+                  className={`py-4 px-6 text-left rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
                     selectedCategory === category.key
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700'
+                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-glass"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-white/10"
                   }`}
                 >
                   {category.label}

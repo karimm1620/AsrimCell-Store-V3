@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export const useFavorites = () => {
   const [favorites, setFavorites] = useState<number[]>([]);
 
   useEffect(() => {
-    const savedFavorites = localStorage.getItem('asrimcell-favorites');
+    const savedFavorites = localStorage.getItem("asrimcell-favorites");
     if (savedFavorites) {
       setFavorites(JSON.parse(savedFavorites));
     }
@@ -13,13 +13,13 @@ export const useFavorites = () => {
   const addToFavorites = (productId: number) => {
     const newFavorites = [...favorites, productId];
     setFavorites(newFavorites);
-    localStorage.setItem('asrimcell-favorites', JSON.stringify(newFavorites));
+    localStorage.setItem("asrimcell-favorites", JSON.stringify(newFavorites));
   };
 
   const removeFromFavorites = (productId: number) => {
-    const newFavorites = favorites.filter(id => id !== productId);
+    const newFavorites = favorites.filter((id) => id !== productId);
     setFavorites(newFavorites);
-    localStorage.setItem('asrimcell-favorites', JSON.stringify(newFavorites));
+    localStorage.setItem("asrimcell-favorites", JSON.stringify(newFavorites));
   };
 
   const toggleFavorite = (productId: number) => {
@@ -37,6 +37,6 @@ export const useFavorites = () => {
     addToFavorites,
     removeFromFavorites,
     toggleFavorite,
-    isFavorite
+    isFavorite,
   };
 };
