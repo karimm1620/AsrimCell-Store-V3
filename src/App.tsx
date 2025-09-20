@@ -423,11 +423,6 @@ function AppContent() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   {
-                    name: "Bayu Firmansyah",
-                    text: "Pelayanan sangat cepat dan voucher langsung aktif! Recommended banget buat yang butuh top up cepat.",
-                    rating: 5,
-                  },
-                  {
                     name: "Salman Alfarissi",
                     text: "Harga terjangkau dan admin responsif. Sudah langganan di sini dari awal buka.",
                     rating: 5,
@@ -435,6 +430,11 @@ function AppContent() {
                   {
                     name: "M. Abdul Rohman",
                     text: "Proses order mudah via WhatsApp, pembayaran fleksibel. Paket internet murah dan berkualitas.",
+                    rating: 5,
+                  },
+                  {
+                    name: "Bayu Febrian",
+                    text: "Pelayanan sangat cepat dan voucher langsung aktif! Recommended banget buat yang butuh top up cepat.",
                     rating: 5,
                   },
                 ].map((testimonial, index) => (
@@ -626,7 +626,7 @@ function AppContent() {
                   <div className="flex items-center gap-4">
                     <div className="glass px-4 py-2 rounded-full">
                       <span className="text-sm font-medium text-white">
-                        Made with ❤️ by Immz
+                        Selamat berbelanja guyss 😎
                       </span>
                     </div>
                   </div>

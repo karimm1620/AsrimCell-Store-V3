@@ -59,22 +59,43 @@ export const PRODUCTS: Product[] = [
 
   // GAME VOUCHERS
   // Mobile Legends
-  { id: 101, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 3', price: 2000, desc: '3 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 102, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 5', price: 2500, desc: '5 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 103, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 12', price: 4000, desc: '12 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 104, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 19', price: 6500, desc: '19 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 105, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 28', price: 8500, desc: '28 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 106, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 36', price: 10500, desc: '36 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 107, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 56', price: 15500, desc: '56 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 108, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 100', price: 27000, desc: '100 Diamonds', logo: '/assets/logos/mobile-legends.png' },
-  { id: 109, category: 'game', provider: 'MOBILE LEGENDS', name: 'Weekly Diamond', price: 28000, desc: '220 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 101, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 3', price: 3000, desc: '3 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 102, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 5', price: 4000, desc: '5 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 103, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 12', price: 6000, desc: '12 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 104, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 19', price: 8000, desc: '19 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 105, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 28', price: 10000, desc: '28 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 106, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 36', price: 12000, desc: '36 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 107, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 44', price: 14000, desc: '44 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 108, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 56', price: 18000, desc: '56 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 109, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 59', price: 18500, desc: '59 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 110, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 74', price: 22000, desc: '74 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 111, category: 'game', provider: 'MOBILE LEGENDS', name: 'Diamond 100', price: 28000, desc: '100 Diamonds', logo: '/assets/logos/mobile-legends.png' },
+  { id: 112, category: 'game', provider: 'MOBILE LEGENDS', name: 'Weekly Diamond', price: 28000, desc: '220 Diamonds', logo: '/assets/logos/mobile-legends.png' },
 
   // Free Fire
-  { id: 201, category: 'game', provider: 'FREE FIRE', name: 'Diamond 5', price: 1000, desc: '5 Diamonds', logo: '/assets/logos/free-fire.png' },
-  { id: 202, category: 'game', provider: 'FREE FIRE', name: 'Diamond 12', price: 2500, desc: '12 Diamonds', logo: '/assets/logos/free-fire.png' },
-  { id: 203, category: 'game', provider: 'FREE FIRE', name: 'Diamond 50', price: 7000, desc: '50 Diamonds', logo: '/assets/logos/free-fire.png' },
-  { id: 204, category: 'game', provider: 'FREE FIRE', name: 'Diamond 70', price: 10000, desc: '70 Diamonds', logo: '/assets/logos/free-fire.png' },
-  { id: 205, category: 'game', provider: 'FREE FIRE', name: 'Diamond 100', price: 13500, desc: '100 Diamonds', logo: '/assets/logos/free-fire.png' },
+  { id: 201, category: 'game', provider: 'FREE FIRE', name: 'Diamond 5', price: 3000, desc: '5 Diamonds', logo: '/assets/logos/free-fire.png' },
+  { id: 202, category: 'game', provider: 'FREE FIRE', name: 'Diamond 12', price: 4000, desc: '12 Diamonds', logo: '/assets/logos/free-fire.png' },
+  { id: 203, category: 'game', provider: 'FREE FIRE', name: 'Diamond 50', price: 9000, desc: '50 Diamonds', logo: '/assets/logos/free-fire.png' },
+  { id: 204, category: 'game', provider: 'FREE FIRE', name: 'Diamond 70', price: 12000, desc: '70 Diamonds', logo: '/assets/logos/free-fire.png' },
+  { id: 205, category: 'game', provider: 'FREE FIRE', name: 'Diamond 100', price: 15000, desc: '100 Diamonds', logo: '/assets/logos/free-fire.png' },
+  { id: 206, category: 'game', provider: 'FREE FIRE', name: 'Diamond 140', price: 20000, desc: '140 Diamonds', logo: '/assets/logos/free-fire.png' },
+  { id: 208, category: 'game', provider: 'FREE FIRE', name: 'Level Up Pass', price: 7000, desc: 'Memebership Level up Pass 6', logo: '/assets/logos/free-fire.png' },
+  { id: 207, category: 'game', provider: 'FREE FIRE', name: 'Level Up Pass', price: 11000, desc: 'Memebership Level up Pass 10', logo: '/assets/logos/free-fire.png' },
+  { id: 209, category: 'game', provider: 'FREE FIRE', name: 'Level Up Pass', price: 11000, desc: 'Memebership Level up Pass 15', logo: '/assets/logos/free-fire.png' },
+  { id: 210, category: 'game', provider: 'FREE FIRE', name: 'Level Up Pass', price: 11000, desc: 'Memebership Level up Pass 20', logo: '/assets/logos/free-fire.png' },
+  { id: 211, category: 'game', provider: 'FREE FIRE', name: 'Level Up Pass', price: 11000, desc: 'Memebership Level up Pass 25', logo: '/assets/logos/free-fire.png' },
+  { id: 212, category: 'game', provider: 'FREE FIRE', name: 'Level Up Pass', price: 15000, desc: 'Memebership Level up Pass 30', logo: '/assets/logos/free-fire.png' },
+  { id: 213, category: 'game', provider: 'FREE FIRE', name: 'Level Up Pass', price: 17000, desc: 'Memebership Level up Pass FF', logo: '/assets/logos/free-fire.png' },
+
+  // Pubg
+  { id: 301, category: 'game', provider: 'PUBG MOBILE', name: '15 UC', price: 10000, desc: 'Pubg Mobile 15 UC', logo: '/assets/logos/pubg.png' },
+  { id: 302, category: 'game', provider: 'PUBG MOBILE', name: '25 UC', price: 11000, desc: 'Pubg Mobile 25 UC', logo: '/assets/logos/pubg.png' },
+  { id: 303, category: 'game', provider: 'PUBG MOBILE', name: 'WDP', price: 14000, desc: 'Weekly Deal Pack 1', logo: '/assets/logos/pubg.png' },
+  { id: 304, category: 'game', provider: 'PUBG MOBILE', name: '60 UC', price: 17000, desc: 'Pubg Mobile 60 UC', logo: '/assets/logos/pubg.png' },
+  { id: 305, category: 'game', provider: 'PUBG MOBILE', name: '50 UC', price: 17000, desc: 'Pubg Mobile 50 UC', logo: '/assets/logos/pubg.png' },
+  { id: 306, category: 'game', provider: 'PUBG MOBILE', name: '35 UC', price: 17000, desc: 'Pubg Mobile 35 UC', logo: '/assets/logos/pubg.png' },
+  { id: 307, category: 'game', provider: 'PUBG MOBILE', name: '70 UC', price: 26000, desc: 'Pubg Mobile 70 UC', logo: '/assets/logos/pubg.png' },
+  { id: 308, category: 'game', provider: 'PUBG MOBILE', name: '100 UC', price: 33000, desc: 'Pubg Mobile 33 UC', logo: '/assets/logos/pubg.png' },
 ];
 
 export const CLASS_OPTIONS = (() => {
