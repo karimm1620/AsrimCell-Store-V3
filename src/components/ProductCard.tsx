@@ -1,5 +1,5 @@
 import React from "react";
-import { HeartIcon, InternetIcon, GameIcon } from "./icons";
+import { Heart, ShoppingCart, Star, Tag } from "lucide-react";
 import { useFavorites } from "../hooks/useFavorites";
 
 interface Product {
@@ -10,12 +10,14 @@ interface Product {
   price: number;
   desc: string;
   logo: string;
+  popular?: boolean;
+  discount?: number;
 }
 
 interface ProductCardProps {
   product: Product;
   isSelected: boolean;
-  onSelect: (product: Product) => void;
+  onSelect: (product: Product | null) => void;
   onAddToCart: (product: Product) => void;
 }
 
@@ -31,101 +33,156 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const { toggleFavorite, isFavorite } = useFavorites();
 
-  return (
-    <div className="group relative glass dark:glass-dark rounded-3xl p-6 shadow-glass border border-white/20 dark:border-white/10 hover:shadow-glass-xl hover:shadow-blue-500/20 dark:hover:shadow-purple-500/20 transform hover:-translate-y-2 hover:scale-105 transition-all duration-500 animate-scale-in backdrop-blur-xl">
-      {/* Favorite Button */}
-      <button
-        onClick={() => toggleFavorite(product.id)}
-        className="absolute top-2 right-2 p-2 rounded-full glass dark:glass-dark hover:shadow-glass transition-all duration-300 z-10 transform hover:scale-110 opacity-80 hover:opacity-100"
-        aria-label="Toggle favorite"
-      >
-        <HeartIcon
-          className={`w-4 h-4 ${
-            isFavorite(product.id)
-              ? "text-red-500"
-              : "text-gray-400 dark:text-gray-500"
-          }`}
-          filled={isFavorite(product.id)}
-        />
-      </button>
+  const getCategoryColor = () => {
+    switch (product.category) {
+      case "internet":
+        return "from-blue-600 to-cyan-600";
+      case "game":
+        return "from-purple-600 to-pink-600";
+      case "ewallet":
+        return "from-green-600 to-emerald-600";
+      case "pulsa":
+        return "from-orange-600 to-yellow-600";
+      default:
+        return "from-gray-600 to-gray-700";
+    }
+  };
 
-      {/* Provider Logo */}
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 glass dark:glass-dark rounded-2xl p-3 flex items-center justify-center shadow-inner-glass">
+  const getCategoryBadge = () => {
+    switch (product.category) {
+      case "internet":
+        return "bg-blue-600 text-white";
+      case "game":
+        return "bg-purple-600 text-white";
+      case "ewallet":
+        return "bg-green-600 text-white";
+      case "pulsa":
+        return "bg-orange-600 text-white";
+      default:
+        return "bg-gray-600 text-white";
+    }
+  };
+
+  const originalPrice = product.discount
+    ? Math.round(product.price / (1 - product.discount / 100))
+    : null;
+
+  return (
+    <div className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl bg-gradient-to-b from-codashop-card-dark to-codashop-deep-purple border border-primary-600/20">
+      {/* Badges Container */}
+      <div className="absolute top-3 left-3 right-3 z-10 flex items-start justify-between pointer-events-none">
+        <div className="flex flex-col gap-2">
+          {product.popular && (
+            <div className="flex items-center gap-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg pointer-events-auto">
+              <Star className="w-3 h-3 fill-current" />
+              <span>Popular</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          {product.discount && (
+            <div className="flex items-center gap-1 bg-secondary-500 text-codashop-deep-purple text-xs font-bold px-3 py-1.5 rounded-full shadow-lg pointer-events-auto">
+              <Tag className="w-3 h-3" />
+              <span>{product.discount}% OFF</span>
+            </div>
+          )}
+
+          <button
+            onClick={() => toggleFavorite(product.id)}
+            className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-200 shadow-sm pointer-events-auto"
+            aria-label="Toggle favorite"
+          >
+            <Heart
+              className={`w-4 h-4 transition-colors duration-200 ${
+                isFavorite(product.id)
+                  ? "text-red-500 fill-current"
+                  : "text-gray-300"
+              }`}
+            />
+          </button>
+        </div>
+      </div>
+
+      {/* Product Image */}
+      <div className="relative h-40 sm:h-48 bg-gradient-to-br from-codashop-deep-purple/50 to-codashop-card-dark/50 overflow-hidden">
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor()} opacity-20`}
+        ></div>
+        <div className="absolute inset-0 flex items-center justify-center p-6">
           <img
             src={product.logo}
             alt={product.provider}
-            className="max-w-full max-h-full object-contain filter drop-shadow-sm"
+            className="w-20 h-20 sm:w-24 sm:h-24 object-contain rounded-xl shadow-2xl"
+            loading="lazy"
           />
         </div>
-        <div className="flex-1 min-w-0">
-          <h3 className="font-bold text-gray-900 dark:text-white text-xl leading-tight truncate">
-            {product.name}
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 truncate font-medium">
+      </div>
+
+      {/* Content */}
+      <div className="p-4 space-y-3">
+        {/* Category & Provider */}
+        <div className="flex items-center justify-between gap-2">
+          <span
+            className={`text-xs font-bold px-2.5 py-1 rounded-md ${getCategoryBadge()}`}
+          >
+            {product.category === "internet"
+              ? "Internet"
+              : product.category === "game"
+              ? "Game"
+              : product.category === "pulsa"
+              ? "Pulsa"
+              : "E-Wallet"}
+          </span>
+          <span className="text-xs text-gray-300 font-bold">
             {product.provider}
-          </p>
+          </span>
         </div>
-      </div>
 
-      {/* Description */}
-      <p className="text-sm text-gray-600 dark:text-gray-300 mb-6 line-clamp-2 font-medium">
-        {product.desc}
-      </p>
+        {/* Product Name */}
+        <h3 className="font-bold text-white text-sm leading-snug line-clamp-2 min-h-[2.5rem]">
+          {product.name}
+        </h3>
 
-      {/* Category Badge */}
-      <div className="flex items-center gap-2 mb-4">
-        {product.category === "game" ? (
-          <div className="flex items-center gap-1 px-3 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-600 dark:text-purple-400 rounded-full text-xs font-bold backdrop-blur-sm border border-purple-500/20">
-            <GameIcon className="w-3 h-3" />
-            <span>Game</span>
-          </div>
-        ) : (
-          <div className="flex items-center gap-1 px-3 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-600 dark:text-blue-400 rounded-full text-xs font-bold backdrop-blur-sm border border-blue-500/20">
-            <InternetIcon className="w-3 h-3" />
-            <span>Internet</span>
-          </div>
-        )}
-      </div>
+        {/* Description */}
+        <p className="text-xs text-gray-400 line-clamp-2 min-h-[2.5rem]">
+          {product.desc}
+        </p>
 
-      {/* Price */}
-      <div className="mb-6">
-        <div className="text-3xl font-black bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-          Rp {formatRupiah(product.price)}
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-2">
-        <button
-          onClick={() => onSelect(product)}
-          className={`flex-1 py-3 px-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 ${
-            isSelected
-              ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-glass hover:shadow-glass-lg"
-              : "glass dark:glass-dark text-gray-700 dark:text-gray-300 hover:shadow-glass"
-          }`}
-        >
-          {isSelected ? "Dipilih" : "Pilih"}
-        </button>
-        <button
-          onClick={() => onAddToCart(product)}
-          className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-2xl transition-all duration-300 shadow-glass hover:shadow-glass-lg transform hover:scale-105"
-        >
-          Beli
-        </button>
-      </div>
-
-      {/* Popular Badge */}
-      {product.id % 3 === 0 && (
-        <div className="absolute -top-2 -left-2">
-          <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-2 rounded-2xl shadow-glass backdrop-blur-sm border border-yellow-300/30">
-            Popular
+        {/* Price Section */}
+        <div className="pt-2">
+          {originalPrice && (
+            <div className="text-xs text-gray-500 line-through mb-1">
+              Rp {formatRupiah(originalPrice)}
+            </div>
+          )}
+          <div className="text-lg font-black text-secondary-500">
+            Rp {formatRupiah(product.price)}
           </div>
         </div>
-      )}
 
-      {/* Glassmorphism overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+        {/* Action Buttons */}
+        <div className="flex gap-2 pt-3">
+          <button
+            onClick={() => onSelect(product)}
+            className={`flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 ${
+              isSelected
+                ? "bg-green-600 hover:bg-green-700 text-white shadow-lg"
+                : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm"
+            }`}
+          >
+            {isSelected ? "✓ Dipilih" : "Pilih"}
+          </button>
+
+          <button
+            onClick={() => onAddToCart(product)}
+            className="p-3 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-lg transition-all duration-200 shadow-lg flex items-center justify-center"
+            title="Add to cart"
+          >
+            <ShoppingCart className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

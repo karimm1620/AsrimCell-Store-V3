@@ -1,5 +1,5 @@
 import React from "react";
-import { FlashIcon } from "./icons";
+import { Zap, Gift, CreditCard, ArrowRight, Star } from "lucide-react";
 
 interface HeroBannerProps {
   onOpenProducts: () => void;
@@ -11,125 +11,133 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   onOpenOrderForm,
 }) => {
   return (
-    <div className="relative overflow-hidden mx-4 mb-12">
-      {/* Glassmorphism container */}
-      <div className="glass rounded-4xl shadow-glass-xl backdrop-blur-4xl border border-white/30 hover:shadow-glass-xl transition-all duration-500">
-        {/* Animated background gradients */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-purple-600/90 to-pink-600/90 rounded-4xl"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-white/20 to-transparent rounded-full -mr-48 -mt-48 animate-float"></div>
-        <div
-          className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-purple-400/30 to-transparent rounded-full -ml-40 -mb-40 animate-float"
-          style={{ animationDelay: "1s" }}
-        ></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-cyan-400/20 to-blue-600/20 rounded-full blur-3xl animate-bounce-soft"></div>
+    <div className="relative overflow-hidden mx-4 mb-8">
+      {/* Main Hero Card */}
+      <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 dark:from-blue-700 dark:via-purple-700 dark:to-pink-700 rounded-3xl shadow-2xl overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -translate-y-32 translate-x-32"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full translate-y-24 -translate-x-24"></div>
+        </div>
 
-        {/* Additional sparkle effects */}
-        <div className="absolute top-8 right-8 w-4 h-4 bg-white/40 rounded-full animate-ping"></div>
-        <div
-          className="absolute bottom-8 left-8 w-3 h-3 bg-yellow-300/60 rounded-full animate-pulse"
-          style={{ animationDelay: "1.5s" }}
-        ></div>
-        <div
-          className="absolute top-1/3 right-1/4 w-2 h-2 bg-pink-300/50 rounded-full animate-bounce"
-          style={{ animationDelay: "2s" }}
-        ></div>
-
-        <div className="relative px-6 py-10 md:px-10 md:py-16 z-10">
-          <div className="max-w-4xl mx-auto">
+        <div className="relative px-6 py-8 md:px-8 md:py-12">
+          <div className="max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-1 text-white">
-                <div className="flex items-center gap-3 mb-4">
-                  <FlashIcon className="w-7 h-7 text-yellow-300 animate-bounce-soft drop-shadow-lg" />
-                  <span className="text-sm font-black uppercase tracking-wider text-yellow-300 backdrop-blur-sm bg-yellow-400/30 px-4 py-2 rounded-full border border-yellow-300/30 shadow-glow-blue">
-                    🔥 Flash Sale Hari Ini
+              {/* Content */}
+              <div className="flex-1 text-white space-y-6">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-bold text-yellow-200">
+                    AsrimCell V4 - Now Available!
                   </span>
                 </div>
 
-                <h1 className="text-4xl md:text-7xl font-black leading-tight mb-8 animate-slide-up drop-shadow-2xl">
-                  Voucher & Top Up
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-orange-200 to-pink-200 animate-glow drop-shadow-none">
-                    Super Hemat!
-                  </span>
-                </h1>
+                {/* Main Title */}
+                <div className="space-y-2">
+                  <h1 className="text-4xl md:text-6xl font-black leading-tight">
+                    Top Up
+                    <span className="block text-yellow-200">Super Mudah!</span>
+                  </h1>
+                  <p className="text-lg md:text-xl text-white/90 font-medium max-w-lg">
+                    Internet, Game, E-Wallet - Semua ada di satu tempat. Proses
+                    instan, harga terbaik, terpercaya sejak 2020.
+                  </p>
+                </div>
 
-                <p className="text-xl md:text-3xl text-white/95 mb-10 font-semibold backdrop-blur-sm leading-relaxed drop-shadow-lg">
-                  Dapatkan diskon hingga{" "}
-                  <span className="text-yellow-300 font-black text-2xl md:text-4xl animate-pulse">
-                    15%
-                  </span>{" "}
-                  untuk semua paket internet dan voucher game favorit kamu.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={onOpenProducts}
-                    className="px-12 py-5 bg-white/95 backdrop-blur-sm text-gray-900 font-black rounded-3xl hover:bg-white transform hover:scale-105 transition-all duration-300 shadow-glass-lg hover:shadow-glass-xl text-lg border-2 border-white/20"
+                    className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 font-bold rounded-2xl hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
                   >
-                    🎯 Lihat Penawaran
+                    <span>Mulai Belanja</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
                   </button>
                   <button
                     onClick={onOpenOrderForm}
-                    className="px-12 py-5 glass border-2 border-white/50 text-white font-black rounded-3xl hover:bg-white/20 transition-all duration-300 backdrop-blur-sm transform hover:scale-105 text-lg shadow-glass"
+                    className="flex items-center justify-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-bold rounded-2xl hover:bg-white/30 transition-all duration-200 border border-white/30"
                   >
-                    🛒 Mulai Belanja
+                    <Star className="w-5 h-5" />
+                    <span>Lihat Promo</span>
                   </button>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-6 text-sm">
-                  <div className="flex items-center gap-3 glass px-4 py-2 rounded-full backdrop-blur-sm">
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-glow-blue"></div>
-                    <span className="text-white/95 font-semibold">
-                      ⚡ Proses Instan
-                    </span>
+                {/* Features */}
+                <div className="grid grid-cols-3 gap-4 pt-4">
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-2">
+                      <Zap className="w-6 h-6 text-yellow-300" />
+                    </div>
+                    <div className="text-sm font-bold">Proses Instan</div>
+                    <div className="text-xs text-white/80">1-3 menit</div>
                   </div>
-                  <div className="flex items-center gap-3 glass px-4 py-2 rounded-full backdrop-blur-sm">
-                    <div
-                      className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-glow-purple"
-                      style={{ animationDelay: "0.5s" }}
-                    ></div>
-                    <span className="text-white/95 font-semibold">
-                      🕐 24/7 Support
-                    </span>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-2">
+                      <Gift className="w-6 h-6 text-pink-300" />
+                    </div>
+                    <div className="text-sm font-bold">Bonus Poin</div>
+                    <div className="text-xs text-white/80">
+                      Setiap transaksi
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 glass px-4 py-2 rounded-full backdrop-blur-sm">
-                    <div
-                      className="w-3 h-3 bg-purple-400 rounded-full animate-pulse shadow-glow-blue"
-                      style={{ animationDelay: "1s" }}
-                    ></div>
-                    <span className="text-white/95 font-semibold">
-                      🛡️ Terpercaya
-                    </span>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-2">
+                      <CreditCard className="w-6 h-6 text-blue-300" />
+                    </div>
+                    <div className="text-sm font-bold">Aman 100%</div>
+                    <div className="text-xs text-white/80">Terjamin</div>
                   </div>
                 </div>
               </div>
 
-              <div className="flex-1 max-w-md">
+              {/* Visual Element */}
+              <div className="flex-shrink-0">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/40 to-orange-400/40 blur-3xl animate-glow"></div>
-                  <div className="relative glass rounded-4xl p-10 border border-white/40 shadow-glass-xl animate-float hover:shadow-glass-xl transition-all duration-500">
+                  <div className="w-40 h-40 md:w-48 md:h-48 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/20">
                     <div className="text-center">
-                      <div className="text-7xl font-black text-white mb-4 animate-bounce-soft drop-shadow-2xl">
-                        15<span className="text-yellow-300">%</span>
+                      <div className="text-5xl md:text-6xl font-black text-white mb-2">
+                        V4
                       </div>
-                      <div className="text-white/95 text-lg font-bold mb-8 drop-shadow-lg">
-                        Diskon Maksimal
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="w-full bg-white/20 rounded-full h-4 mb-8 overflow-hidden backdrop-blur-sm border border-white/30">
-                        <div className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 h-4 rounded-full w-3/4 animate-pulse shadow-glow-blue relative">
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
-                        </div>
-                      </div>
-
-                      <div className="text-sm text-white/90 font-bold backdrop-blur-sm bg-white/20 px-6 py-3 rounded-full border border-white/30 shadow-glass">
-                        ⏰ Penawaran terbatas hari ini
+                      <div className="text-white/90 text-sm font-bold">
+                        New Experience
                       </div>
                     </div>
                   </div>
+                  {/* Floating Elements */}
+                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce"></div>
+                  <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-pink-400 rounded-full animate-pulse"></div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Stats */}
+      <div className="grid grid-cols-3 gap-4 mt-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 text-center shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="text-2xl font-black text-blue-600 dark:text-blue-400">
+            50K+
+          </div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+            Pelanggan
+          </div>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 text-center shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="text-2xl font-black text-green-600 dark:text-green-400">
+            99.9%
+          </div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+            Sukses Rate
+          </div>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 text-center shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="text-2xl font-black text-purple-600 dark:text-purple-400">
+            24/7
+          </div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+            Support
           </div>
         </div>
       </div>

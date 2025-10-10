@@ -1,16 +1,45 @@
-import React from 'react';
+import React from "react";
+import { Trefoil } from "ldrs/react";
 
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   className?: string;
+  variant?: "default" | "trefoil";
+  color?: string;
 }
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'md', className = '' }) => {
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+  size = "md",
+  className = "",
+  variant = "default",
+  color = "#3b82f6",
+}) => {
   const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-8 h-8',
-    lg: 'w-16 h-16'
+    sm: "w-4 h-4",
+    md: "w-8 h-8",
+    lg: "w-16 h-16",
   };
+
+  const trefoilSizes = {
+    sm: "20",
+    md: "40",
+    lg: "60",
+  };
+
+  if (variant === "trefoil") {
+    return (
+      <div className={`flex items-center justify-center ${className}`}>
+        <Trefoil
+          size={trefoilSizes[size]}
+          stroke="4"
+          strokeLength="0.15"
+          bgOpacity="0.1"
+          speed="1.4"
+          color={color}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`${sizeClasses[size]} ${className} mx-auto`}>

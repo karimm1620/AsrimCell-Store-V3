@@ -1,3 +1,174 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Performance optimizations */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Prevent layout shift */
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Optimize form inputs */
+  input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  /* Improve touch targets on mobile */
+  @media (max-width: 768px) {
+    button, input, select, textarea {
+      min-height: 44px;
+    }
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  /* Dark mode improvements */
+  .dark {
+    color-scheme: dark;
+  }
+  
+  /* Fix z-index stacking context for dropdowns */
+  .enhanced-select-dropdown {
+    z-index: 9999 !important;
+    position: relative;
+  }
+  
+  /* Ensure form sections don't overlap */
+  .form-section {
+    position: relative;
+    z-index: auto;
+  }
+  
+  .form-section.payment-section {
+    z-index: 20;
+  }
+  
+  .form-section.notes-section {
+    z-index: 10;
+  }
+  
+  /* Glassmorphism utilities */
+  .glass {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Codashop-inspired dark cards */
+  .card-dark {
+    background: linear-gradient(135deg, #2a0b36 0%, #1a0021 100%);
+    border: 1px solid rgba(98, 66, 252, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-dark:hover {
+    border-color: rgba(98, 66, 252, 0.4);
+    box-shadow: 0 8px 30px rgba(98, 66, 252, 0.2);
+  }
+
+  /* Light mode card styles */
+  .light .card-light {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .light .card-light:hover {
+    border-color: #6242FC;
+    box-shadow: 0 4px 20px rgba(98, 66, 252, 0.15);
+  }
+
+  /* Responsive text utilities */
+  .text-responsive {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .title-responsive {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Smooth loading animation */
+  @keyframes smoothPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(0.98); }
+  }
+
+  .animate-smooth-pulse {
+    animation: smoothPulse 2s ease-in-out infinite;
+  }
+
+  /* Minimalist loader */
+  @keyframes minimalistSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .animate-minimalist-spin {
+    animation: minimalistSpin 1s linear infinite;
+  }
+  
+  /* Enhanced iOS 26 / macOS Tahoe inspired glassmorphism */
+  .glass-premium {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-premium-dark {
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+}
