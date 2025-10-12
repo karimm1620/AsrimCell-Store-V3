@@ -18,9 +18,12 @@ export const MinimalistLoader: React.FC = () => {
       <div className="relative z-10 text-center px-4">
         <div className="mb-12 relative">
           <div className="relative inline-block">
-            <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 dark:from-blue-500 dark:via-purple-500 dark:to-blue-600 flex items-center justify-center shadow-2xl transform hover:scale-105 transition-transform duration-500">
+            {/* <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 dark:from-blue-500 dark:via-purple-500 dark:to-blue-600 flex items-center justify-center shadow-2xl transform hover:scale-105 transition-transform duration-500">
               <span className="text-white font-black text-5xl">A</span>
-            </div>
+            </div> */}
+            <div className="w-28 h-28 flex items-center justify-center rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                <img className="w-28 h-28" src="/assets/lock/docker_.png" alt="logo" />
+              </div>
 
             <div className="absolute -inset-4">
               <div

@@ -328,9 +328,12 @@ function AppContent() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="md:col-span-2">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 dark:from-primary-600 dark:to-primary-700 light:from-primary-500 light:to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
+                  {/* <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 dark:from-primary-600 dark:to-primary-700 light:from-primary-500 light:to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
                     <span className="text-white font-bold text-xl">A</span>
-                  </div>
+                  </div> */}
+                  <div className="w-12 h-12 items-center justify-center rounded-xl shadow-lg">
+                <img className="w-12 h-12" src="/assets/lock/docker_.png" alt="logo" />
+              </div>
                   <div className="font-black text-3xl text-white dark:text-white light:text-light-text-primary">
                     AsrimCell
                   </div>
