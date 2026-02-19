@@ -1,5 +1,3 @@
-import React from "react";
-
 export const InternetIcon = ({
   className = "w-5 h-5",
 }: {

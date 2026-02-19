@@ -27,7 +27,7 @@ export const PriceComparison: React.FC<PriceComparisonProps> = ({
     if (!competitorPrice) return null;
     const difference = competitorPrice - currentPrice;
     const percentage = Math.round(
-      (Math.abs(difference) / competitorPrice) * 100
+      (Math.abs(difference) / competitorPrice) * 100,
     );
     return {
       amount: Math.abs(difference),

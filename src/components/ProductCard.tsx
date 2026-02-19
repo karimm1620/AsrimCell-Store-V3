@@ -1,6 +1,5 @@
 import React from "react";
-import { Heart, ShoppingCart, Star, Tag } from "lucide-react";
-import { useFavorites } from "../hooks/useFavorites";
+import { ShoppingCart, Star, Tag } from "lucide-react";
 
 interface Product {
   id: number;
@@ -31,8 +30,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onSelect,
   onAddToCart,
 }) => {
-  const { toggleFavorite, isFavorite } = useFavorites();
-
   const getCategoryColor = () => {
     switch (product.category) {
       case "internet":
@@ -69,7 +66,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl bg-gradient-to-b from-codashop-card-dark to-codashop-deep-purple border border-primary-600/20">
-      {/* Badges Container */}
+      {/* Badges Container - Top Left & Top Right */}
       <div className="absolute top-3 left-3 right-3 z-10 flex items-start justify-between pointer-events-none">
         <div className="flex flex-col gap-2">
           {product.popular && (
@@ -80,27 +77,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 items-end">
           {product.discount && (
             <div className="flex items-center gap-1 bg-secondary-500 text-codashop-deep-purple text-xs font-bold px-3 py-1.5 rounded-full shadow-lg pointer-events-auto">
               <Tag className="w-3 h-3" />
               <span>{product.discount}% OFF</span>
             </div>
           )}
-
-          <button
-            onClick={() => toggleFavorite(product.id)}
-            className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-200 shadow-sm pointer-events-auto"
-            aria-label="Toggle favorite"
-          >
-            <Heart
-              className={`w-4 h-4 transition-colors duration-200 ${
-                isFavorite(product.id)
-                  ? "text-red-500 fill-current"
-                  : "text-gray-300"
-              }`}
-            />
-          </button>
         </div>
       </div>
 
@@ -129,10 +112,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {product.category === "internet"
               ? "Internet"
               : product.category === "game"
-              ? "Game"
-              : product.category === "pulsa"
-              ? "Pulsa"
-              : "E-Wallet"}
+                ? "Game"
+                : product.category === "pulsa"
+                  ? "Pulsa"
+                  : "E-Wallet"}
           </span>
           <span className="text-xs text-gray-300 font-bold">
             {product.provider}

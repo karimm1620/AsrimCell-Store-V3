@@ -30,17 +30,17 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
 
   const internetProviders = [
     ...new Set(
-      PRODUCTS.filter((p) => p.category === "internet").map((p) => p.provider)
+      PRODUCTS.filter((p) => p.category === "internet").map((p) => p.provider),
     ),
   ];
   const gameProviders = [
     ...new Set(
-      PRODUCTS.filter((p) => p.category === "game").map((p) => p.provider)
+      PRODUCTS.filter((p) => p.category === "game").map((p) => p.provider),
     ),
   ];
   const ewalletProviders = [
     ...new Set(
-      PRODUCTS.filter((p) => p.category === "ewallet").map((p) => p.provider)
+      PRODUCTS.filter((p) => p.category === "ewallet").map((p) => p.provider),
     ),
   ];
 

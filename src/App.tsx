@@ -33,25 +33,88 @@ function ErrorFallback({
   resetErrorBoundary: () => void;
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-codashop-dark-bg dark:bg-codashop-dark-bg light:bg-light-bg">
-      <div className="text-center p-8 max-w-md mx-auto card-dark light:card-light rounded-2xl">
-        <div className="text-6xl mb-4">⚠️</div>
-        <h2 className="text-2xl font-bold text-white dark:text-white light:text-light-text-primary mb-4">
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#0f172a",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          padding: "32px",
+          maxWidth: "448px",
+          borderRadius: "16px",
+          backgroundColor: "#1e293b",
+          border: "1px solid #334155",
+        }}
+      >
+        <div style={{ fontSize: "48px", marginBottom: "16px" }}>⚠️</div>
+        <h2
+          style={{
+            fontSize: "24px",
+            fontWeight: "bold",
+            color: "#ffffff",
+            marginBottom: "16px",
+          }}
+        >
           Oops! Something went wrong
         </h2>
-        <p className="text-gray-300 dark:text-gray-300 light:text-light-text-secondary mb-6 text-responsive">
+        <p
+          style={{
+            fontSize: "16px",
+            color: "#e2e8f0",
+            marginBottom: "24px",
+          }}
+        >
           The application encountered an error. Please try refreshing the page.
         </p>
-        <div className="space-y-3">
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <button
             onClick={resetErrorBoundary}
-            className="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+            style={{
+              width: "100%",
+              padding: "8px 16px",
+              backgroundColor: "#6242FC",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "8px",
+              fontWeight: "500",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = "#5032d9")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#6242FC")
+            }
           >
             Try Again
           </button>
           <button
             onClick={() => window.location.reload()}
-            className="w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+            style={{
+              width: "100%",
+              padding: "8px 16px",
+              backgroundColor: "#475569",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "8px",
+              fontWeight: "500",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = "#374151")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#475569")
+            }
           >
             Refresh Page
           </button>
@@ -66,6 +129,9 @@ function AppContent() {
   const [navigation, setNavigation] = useState<NavigationState>({
     view: "home",
   });
+  const [navigationHistory, setNavigationHistory] = useState<NavigationState[]>(
+    [{ view: "home" }],
+  );
   const [mobileOpen, setMobileOpen] = useState(false);
   const { notifications, removeNotification } = useNotifications();
 
@@ -84,16 +150,29 @@ function AppContent() {
   }, []);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/sweetalert2@11";
-    script.async = true;
-    document.head.appendChild(script);
+    const handlePopState = (event: PopStateEvent) => {
+      event.preventDefault();
+      handleMobileBack();
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    window.history.pushState({ navigationState: navigation }, "");
 
     return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [navigation]);
+
+  useEffect(() => {
+    const loadSweetAlert = async () => {
+      if (!window.Swal) {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/sweetalert2@11";
+        script.async = true;
+        document.head.appendChild(script);
       }
     };
+    loadSweetAlert();
   }, []);
 
   useEffect(() => {
@@ -148,9 +227,7 @@ function AppContent() {
       .filter(Boolean)
       .join("\n");
 
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${Telepon_Admin}&text=${encodeURIComponent(
-      message
-    )}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${Telepon_Admin}&text=${encodeURIComponent(message)}`;
 
     if (window.Swal) {
       const result = await window.Swal.fire({
@@ -159,15 +236,9 @@ function AppContent() {
           <div style="text-align: left; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 20px; border-radius: 15px; border: 2px solid #e9ecef; margin: 10px 0;">
             <div style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 15px;">
               <h3 style="margin: 0 0 10px 0; color: #495057; font-size: 14px; font-weight: 600; border-bottom: 2px solid #6242FC; padding-bottom: 8px;">📦 Detail Produk</h3>
-              <p style="margin: 5px 0; color: #212529; font-weight: 600; font-size: 15px;">📱 ${
-                product.name
-              }</p>
-              <p style="margin: 5px 0; color: #6c757d; font-size: 13px;">🏢 Provider: ${
-                product.provider
-              }</p>
-              <p style="margin: 5px 0; color: #6c757d; font-size: 13px;">📝 ${
-                product.desc
-              }</p>
+              <p style="margin: 5px 0; color: #212529; font-weight: 600; font-size: 15px;">📱 ${product.name}</p>
+              <p style="margin: 5px 0; color: #6c757d; font-size: 13px;">🏢 Provider: ${product.provider}</p>
+              <p style="margin: 5px 0; color: #6c757d; font-size: 13px;">📝 ${product.desc}</p>
               <p style="margin: 5px 0; color: #6c757d; font-size: 13px;">📊 Jumlah: <strong style="color: #212529;">${quantity} item</strong></p>
             </div>
 
@@ -175,21 +246,13 @@ function AppContent() {
               <h3 style="margin: 0 0 10px 0; color: #495057; font-size: 14px; font-weight: 600; border-bottom: 2px solid #6242FC; padding-bottom: 8px;">👤 Data Pemesan</h3>
               <p style="margin: 5px 0; color: #212529; font-size: 13px;">Nama: <strong>${name}</strong></p>
               <p style="margin: 5px 0; color: #212529; font-size: 13px;">No HP: <strong>${phone}</strong></p>
-              <p style="margin: 5px 0; color: #212529; font-size: 13px;">💳 Pembayaran: <strong style="color: #6242FC;">${getPaymentMethodLabel(
-                paymentMethod
-              )}</strong></p>
-              ${
-                note
-                  ? `<p style="margin: 5px 0; color: #212529; font-size: 13px;">📝 Catatan: <em>${note}</em></p>`
-                  : ""
-              }
+              <p style="margin: 5px 0; color: #212529; font-size: 13px;">💳 Pembayaran: <strong style="color: #6242FC;">${getPaymentMethodLabel(paymentMethod)}</strong></p>
+              ${note ? `<p style="margin: 5px 0; color: #212529; font-size: 13px;">📝 Catatan: <em>${note}</em></p>` : ""}
             </div>
 
             <div style="background: linear-gradient(135deg, #6242FC 0%, #8142ff 100%); padding: 15px; border-radius: 10px; text-align: center;">
               <p style="margin: 0; color: white; font-size: 13px; font-weight: 500;">Total Pembayaran</p>
-              <p style="margin: 5px 0 0 0; color: white; font-size: 24px; font-weight: 700;">Rp ${formatRupiah(
-                total
-              )}</p>
+              <p style="margin: 5px 0 0 0; color: white; font-size: 24px; font-weight: 700;">Rp ${formatRupiah(total)}</p>
             </div>
 
             <div style="margin-top: 15px; padding: 10px; background: #e7f3ff; border-left: 4px solid #0d6efd; border-radius: 5px;">
@@ -229,27 +292,41 @@ function AppContent() {
   };
 
   const handleCategoryClick = (categoryId: string) => {
-    setNavigation({ view: "category", categoryId });
+    const newState = { view: "category", categoryId } as NavigationState;
+    setNavigation(newState);
+    setNavigationHistory((prev) => [...prev, newState]);
     setMobileOpen(false);
   };
 
   const handleSubcategoryClick = (subcategoryId: string) => {
     if (navigation.categoryId) {
-      setNavigation({
+      const newState = {
         view: "subcategory",
         categoryId: navigation.categoryId,
         subcategoryId,
-      });
+      } as NavigationState;
+      setNavigation(newState);
+      setNavigationHistory((prev) => [...prev, newState]);
+    }
+  };
+
+  const handleMobileBack = () => {
+    if (navigationHistory.length > 1) {
+      const newHistory = navigationHistory.slice(0, -1);
+      const previousState = newHistory[newHistory.length - 1];
+      setNavigation(previousState);
+      setNavigationHistory(newHistory);
     }
   };
 
   const handleBackToHome = () => {
     setNavigation({ view: "home" });
+    setNavigationHistory([{ view: "home" }]);
   };
 
   const handleBackToCategory = () => {
     if (navigation.categoryId) {
-      setNavigation({ view: "category", categoryId: navigation.categoryId });
+      handleMobileBack();
     }
   };
 
@@ -332,8 +409,12 @@ function AppContent() {
                     <span className="text-white font-bold text-xl">A</span>
                   </div> */}
                   <div className="w-12 h-12 items-center justify-center rounded-xl shadow-lg">
-                <img className="w-12 h-12" src="/assets/lock/docker_.png" alt="logo" />
-              </div>
+                    <img
+                      className="w-12 h-12"
+                      src="/assets/lock/docker_.png"
+                      alt="logo"
+                    />
+                  </div>
                   <div className="font-black text-3xl text-white dark:text-white light:text-light-text-primary">
                     AsrimCell
                   </div>
@@ -441,12 +522,6 @@ function AppContent() {
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span className="font-medium text-responsive">
                       WhatsApp: 0857-8258-0079
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="font-medium text-responsive">
-                      WhatsApp: 0888-804-2365
                     </span>
                   </li>
                   <li className="flex items-center gap-2">

@@ -87,7 +87,7 @@ const EnhancedSelect: React.FC<EnhancedSelectProps> = memo(
             break;
         }
       },
-      [disabled, isOpen, focusedIndex, options, onChange]
+      [disabled, isOpen, focusedIndex, options, onChange],
     );
 
     const getVariantStyles = useCallback(() => {
@@ -250,7 +250,7 @@ const EnhancedSelect: React.FC<EnhancedSelectProps> = memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
 EnhancedSelect.displayName = "EnhancedSelect";

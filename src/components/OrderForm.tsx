@@ -24,7 +24,7 @@ const OrderForm: React.FC<OrderFormProps> = memo(
 
     const totalPrice = useMemo(
       () => (selectedProduct ? selectedProduct.price * formData.quantity : 0),
-      [selectedProduct, formData.quantity]
+      [selectedProduct, formData.quantity],
     );
 
     const getPaymentMethodLabel = (method: PaymentMethod) => {
@@ -38,9 +38,27 @@ const OrderForm: React.FC<OrderFormProps> = memo(
       return labels[method];
     };
 
+    const isGameOrDiamond =
+      selectedProduct &&
+      (selectedProduct.category === "game" ||
+        selectedProduct.name.toLowerCase().includes("diamond"));
+
+    const isNoteRequired = isGameOrDiamond;
+
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       if (!selectedProduct) return;
+
+      if (isNoteRequired && !formData.note.trim()) {
+        if (window.Swal) {
+          window.Swal.fire({
+            icon: "warning",
+            title: "Data Tidak Lengkap",
+            text: "Silakan masukkan Player ID/Game ID untuk voucher game",
+          });
+        }
+        return;
+      }
 
       setIsSubmitting(true);
 
@@ -202,22 +220,34 @@ const OrderForm: React.FC<OrderFormProps> = memo(
 
             <div className="space-y-3">
               <label className="block text-sm font-bold text-gray-900 dark:text-white">
-                Catatan (Opsional)
+                {isNoteRequired
+                  ? "Player ID / Game ID *"
+                  : "Catatan (Opsional)"}
               </label>
               <textarea
                 value={formData.note}
                 onChange={(e) => handleInputChange("note", e.target.value)}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-600 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-purple-500/50 focus:border-blue-500/50 dark:focus:border-purple-500/50 focus:shadow-glass transition-all duration-300 text-gray-900 dark:text-white resize-none font-medium backdrop-blur-xl text-sm sm:text-base"
+                className={`w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/90 dark:bg-gray-800/90 border rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-purple-500/50 focus:border-blue-500/50 dark:focus:border-purple-500/50 focus:shadow-glass transition-all duration-300 text-gray-900 dark:text-white resize-none font-medium backdrop-blur-xl text-sm sm:text-base ${
+                  isNoteRequired && !formData.note.trim()
+                    ? "border-red-500/50 dark:border-red-500/50"
+                    : "border-gray-200 dark:border-gray-600"
+                }`}
                 rows={4}
-                placeholder="ID Game & Server (wajib untuk top up game)"
+                placeholder={
+                  isNoteRequired
+                    ? "Masukkan Player ID / Game ID (wajib)"
+                    : "ID Game & Server atau catatan lainnya"
+                }
                 aria-describedby="note-help"
+                required={isNoteRequired ?? false}
               />
               <p
                 id="note-help"
-                className="text-xs text-gray-500 dark:text-gray-400"
+                className={`text-xs ${isNoteRequired && !formData.note.trim() ? "text-red-500 dark:text-red-400" : "text-gray-500 dark:text-gray-400"}`}
               >
-                Untuk voucher game, mohon cantumkan ID Game dan Server yang
-                valid
+                {isNoteRequired
+                  ? "Player ID / Game ID wajib untuk voucher game"
+                  : "Untuk voucher game, mohon cantumkan ID Game dan Server yang valid"}
               </p>
             </div>
           </div>
@@ -288,7 +318,7 @@ const OrderForm: React.FC<OrderFormProps> = memo(
         </form>
       </div>
     );
-  }
+  },
 );
 
 OrderForm.displayName = "OrderForm";

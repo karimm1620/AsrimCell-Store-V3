@@ -84,7 +84,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                   </div>
                 </div>
               </button>
-            )
+            ),
           )}
         </div>
       </div>
